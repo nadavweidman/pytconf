@@ -1,6 +1,57 @@
-- add ability to set the name of the current applcation on the terminal.
+- when completing commands show only commands
+	which are visible (so don't show "complete" for instance).
 
-- add help, write config file, show config, bash completions and more.
+- when printing help, for instance:
+	==================
+	Usage: pygitpub fix_metadata [OPTIONS] [ARGS]...
+
+	  Fix the metadata of the project on github to match the source code
+
+	Options:
+
+	  Paramters for your github account
+	    username [str]: What is your github username? [MANDATORY]
+	    token [str]: What is your github token? [MANDATORY]
+	    token_name [str]: What is the name of the token on github? [MANDATORY]
+	===================
+	I don't see the values for "username", "token", "token_name" even though they are supplied
+	in "~/.config/pygitpub.yaml".
+
+- add ability to search for close matches
+	for instance
+	$ pypitools uploda
+	Did you means "pypitools upload"?
+
+- add the ability to have absolute param names:
+	$ command --ConfigDebug.debug=True
+	This way we could have same name parameters in different configs.
+	If an ambigious parameter is supplied then give an error.
+
+- add ability to add more detailed description about a command
+	This is needed, for instance, in the pypitools package where I want to have a short description
+	for a command but a long one as well.
+	Should we have a flag to see the long descriptions? Probably...
+
+- add support for reading the config file in yaml format.
+
+- add the ability for libraries to either:
+	- add commands
+	or
+        - add flags to other commands
+	examples:
+	- pylogconf could add a command to show the current logging configuration
+	- pylogconf could add a --loglevel=[value] to every other command.
+
+- add ability to set the name of the current applcation on the terminal.
+	meaning that when the application starts running the terminal will change
+	it's name to the name of the application and not just "python".
+
+- add more "hidden" commands:
+	write config file
+	show config.
+	show config file name
+- add flag that will show the hidden commands also
+	help --all?
 
 - add dynamic loading of the actual commands to make interactions faster.
 - add plugin based system to discover commands automatically with support for auto loading.

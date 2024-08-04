@@ -1,17 +1,17 @@
 from collections import OrderedDict
 from enum import Enum
 
-from typing import Type, List
+from typing import List, Dict, Any
 
 from pytconf.extended_enum import str_to_enum_value, ExtendedEnum
 
 
 class EnumSubset:
 
-    def __init__(self, enum_type: Type[Enum], list_of_values: List[Type[Enum]]) -> None:
+    def __init__(self, enum_type: Enum, list_of_values: List[Enum]) -> None:
         self.enum_type = enum_type
         # TODO: this should actually be an ordered set
-        self.selected = OrderedDict()
+        self.selected: Dict[Any, None] = OrderedDict()
         for value in list_of_values:
             self.add(value)
 
@@ -25,8 +25,7 @@ class EnumSubset:
         del self.selected[enum_value]
 
     def yield_values(self):
-        for value in self.selected.keys():
-            yield value
+        yield from self.selected.keys()
 
     def values(self):
         return self.selected.keys()
@@ -55,11 +54,11 @@ class EnumSubset:
         return g_from_string(e, s)
 
 
-def g_from_enum_all(e: Type[ExtendedEnum]) -> EnumSubset:
+def g_from_enum_all(e: ExtendedEnum) -> EnumSubset:
     return EnumSubset(enum_type=e, list_of_values=e.get_list_of_all_values(),)
 
 
-def g_from_string(e: Type[Enum], s: str) -> EnumSubset:
+def g_from_string(e: Enum, s: str) -> EnumSubset:
     r = EnumSubset(enum_type=e, list_of_values=[])
     for name in s.split(","):
         v = str_to_enum_value(s=name, e=e)

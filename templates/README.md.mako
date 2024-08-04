@@ -1,42 +1,72 @@
 <%!
+    import pydmt.helpers.misc
+    import pydmt.helpers.signature
+    import pydmt.helpers.project
+    import pydmt.helpers.python
+    import pydmt.helpers.urls
     import config.project
-    import config.python
-    import user.personal
+    import config.personal
     import glob
     import yaml
-%>
-# *${config.project.project_name}* project by ${user.personal.personal_fullname}
+    import os
+%># *${pydmt.helpers.project.get_name()}* project by ${config.personal.fullname}
 
-![PyPI - Status](https://img.shields.io/pypi/status/${config.python.package_name})
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/${config.python.package_name})
-![PyPI - License](https://img.shields.io/pypi/l/${config.python.package_name})
-![PyPI - Package Name](https://img.shields.io/pypi/v/${config.python.package_name})
-![PyPI - Format](https://img.shields.io/pypi/format/${config.python.package_name})
+description: ${config.project.description_short}
 
-![PyPI - Downloads](https://img.shields.io/pypi/dd/${config.python.package_name})
-![PyPI - Downloads](https://img.shields.io/pypi/dw/${config.python.package_name})
-![PyPI - Downloads](https://img.shields.io/pypi/dm/${config.python.package_name})
+project website: ${pydmt.helpers.urls.get_website()}
+
+author: ${config.personal.fullname}
+
+version: ${pydmt.helpers.misc.get_version_str()}
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-% if config.project.codacy_id:
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/${config.project.codacy_id})](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=${config.project.project_github_username}/${config.python.package_name}&amp;utm_campaign=Badge_Grade)
-% endif
-<%doc>
-![Downloads](https://pepy.tech/badge/${config.python.package_name})
-![Downloads](https://pepy.tech/badge/${config.python.package_name}/month)
-![Downloads](https://pepy.tech/badge/${config.python.package_name}/week)
-[![Known Vulnerabilities](https://snyk.io/test/github/${config.project.project_github_username}/${config.project.github_repo_name}/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/${config.project.project_github_username}/${config.project.github_repo_name}?targetFile=requirements.txt)</%doc>
+
+${"##"} github
+
+![License](https://img.shields.io/github/license/veltzer/${pydmt.helpers.python.get_package_name()})
+
+${"##"} build
+
 <%
 	action_files = glob.glob('.github/workflows/*.yml')
 	for action_file in action_files:
 		with open(action_file, 'r') as stream:
 			action_name=yaml.safe_load(stream)["name"]
-			context.write(f"![{action_name}](https://github.com/{config.project.project_github_username}/{config.project.project_name}/workflows/{action_name}/badge.svg)")
+			context.write(f"![{action_name}](https://github.com/{config.personal.github_username}/{pydmt.helpers.project.get_name()}/workflows/{action_name}/badge.svg)")
 %>
-${config.project.project_short_description}
 
-project website: ${config.project.project_website}
+${"##"} pypi
 
-chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
+![PyPI - Status](https://img.shields.io/pypi/status/${pydmt.helpers.python.get_package_name()})
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/${pydmt.helpers.python.get_package_name()})
+![PyPI - License](https://img.shields.io/pypi/l/${pydmt.helpers.python.get_package_name()})
+![PyPI - Package Name](https://img.shields.io/pypi/v/${pydmt.helpers.python.get_package_name()})
+![PyPI - Format](https://img.shields.io/pypi/format/${pydmt.helpers.python.get_package_name()})
 
+${"##"} pypi download
+
+![PyPI - Downloads](https://img.shields.io/pypi/dd/${pydmt.helpers.python.get_package_name()})
+![PyPI - Downloads](https://img.shields.io/pypi/dw/${pydmt.helpers.python.get_package_name()})
+![PyPI - Downloads](https://img.shields.io/pypi/dm/${pydmt.helpers.python.get_package_name()})
+<%doc>
+![Downloads](https://pepy.tech/badge/${pydmt.helpers.python.get_package_name()})
+![Downloads](https://pepy.tech/badge/${pydmt.helpers.python.get_package_name()}/week)
+![Downloads](https://pepy.tech/badge/${pydmt.helpers.python.get_package_name()}/month)
+</%doc>
+% if hasattr(config.project, "codacy_id"):
+${"##"} codacy stuff 
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/${config.project.codacy_id})](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=${config.personal.github_username}/${pydmt.helpers.python.get_package_name()}&amp;utm_campaign=Badge_Grade)
+% endif
+
+% if os.path.isfile("../snipplets/main.md.mako"):
 <%include file="../snipplets/main.md.mako" />
+% endif
+
+${"##"} contact me
+[mailto](mailto:${config.personal.email})
+![gitter](https://img.shields.io/gitter/room/veltzer/mark.veltzer)
+![discord](https://img.shields.io/discord/719336281624281119)
+![discord](https://img.shields.io/discord/719336282194444302)
+
+${config.personal.fullname}, Copyright © ${pydmt.helpers.signature.get_copyright_years_long()}

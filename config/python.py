@@ -1,46 +1,31 @@
-import config.project
+from typing import List
 
-package_name = config.project.project_name
 
-console_scripts = []
-
-setup_requires = []
-
-run_requires = [
-    "termcolor",
-    "yattag",
-    "pyfakeuse",
-]
-
-test_requires = [
-    "pymakehelper",
-    "pylint",
-    "pytest",
-    "pytest-cov",
-    "flake8",
-    "pylogconf",
-]
-
-dev_requires = [
-    "pyclassifiers",
+dev_requires: List[str] = [
     "pypitools",
-    "pydmt",
-    "Sphinx",
-    "pytest",
-    "pytest-cov",
-    "pylint",
-    "pyflakes",
-    "flake8",
     "black",
 ]
-
-install_requires = list(setup_requires)
-install_requires.extend(run_requires)
-
-python_requires = ">=3.7"
-
-extras_require = {
-}
-test_os = "[ubuntu-18.04, ubuntu-20.04]"
-test_python = "[3.7, 3.8, 3.9]"
-test_container = "[ 'ubuntu:18.04', 'ubuntu:20.04' ]"
+config_requires: List[str] = [
+    "pyclassifiers",
+]
+install_requires: List[str] = [
+    "termcolor",
+    "yattag",
+]
+build_requires: List[str] = [
+    "pymakehelper",
+    "pydmt",
+]
+test_requires: List[str] = [
+    "pylint",
+    "pytest",
+    "pytest-cov",
+    "flake8",
+    "pyflakes",
+    "pycodestyle",
+    "mypy",
+    # types
+    "types-termcolor",
+    "types-PyYAML",
+]
+requires = config_requires + install_requires + build_requires + test_requires

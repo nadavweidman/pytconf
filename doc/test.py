@@ -4,11 +4,11 @@
 This is the essence of how pytconf works and how it is now designed
 """
 
-from typing import ClassVar
+from typing import List
 
 d = {}
 
-global_list = []
+global_list: List[int] = []
 
 
 class Meta(type):
@@ -26,7 +26,7 @@ class Meta(type):
 
 class Config(metaclass=Meta):
     @classmethod
-    def create_int(cls: ClassVar, default: int, extra: int) -> int:
+    def create_int(cls, default: int, extra: int) -> int:
         global global_list
         global_list.append(extra)
         return default

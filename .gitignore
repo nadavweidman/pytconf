@@ -1,79 +1,130 @@
+# generated
+/build/
+/toolchain/
+/dist/
+/target/
+/out/
+*.out
+/.mypy_cache/
+
+# folders to git ignore
+/*.gi
+
+# gems
+/gems/
+
+# hive
+/derby.log
+/dfs/
+/metastore_db/
+
+# c, c++ stuff
+*.o
+*.so
+*.a
+*.dis
+/Makefile.bak
+/bin/
+/obj/
+*.o.ur-safe
+*.oo
+*.elf
+*.dep
+core.*
+lib*.so.*
+*.gch
+*.pchi
+*.gcda
+
+# kernel stuff...
+*.ko
+*.mod
+*.mod.c
+*.mod.cmd
+.*.o.cmd
+.*.ko.cmd
+.*.o.tmp
+.*.o.d
+.tmp_versions
+Module.symvers
+modules.order
+*.objdump
+/src/kernel/.*.tmp
+.modules.*.cmd
+.Module.*.cmd
+/flags.cfg
+
+# sphinx
+/docs/_build/
+/docs/.doctrees/environment.pickle
+
+# installations
+/external/
+/install/
+*.tar.gz
+
+# python
 __pycache__/
-*.py[cod]
-/.pydmt/
+*.py[oc]
+/wheel/
 /.venv/
-
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
 .coverage
 .coverage.*
-.cache
-nosetests.xml
 coverage.xml
-*,cover
-.hypothesis/
+*.egg-info/
 
-# Translations
-*.mo
-*.pot
+# mine
+/.pydmt.build.errors
+/.pydmt/
+*.stamp
+*.stamp.*
 
-# Django stuff:
+# java
+*.class
+*.jar
+*.war
+*.ear
+*.jsa
+/.mtj.tmp/
+/hs_err_pid*
+
+# node modules
+node_modules/
+
+# ppt, pdf
+/doc/odp/*.pdf
+/doc/odp/*.ppt
+
+# intel compiler pgo
+*.dyn
+*.dpi
+# *.lock
+
+# dwarf dynamic debug info
+*.dwo
+
+# locks by open office
+.~lock.*
+
+# haskell
+*.hi
+
+# repositries of deb packages
+/deb/mypackage/DEBIAN/control
+
+# generic
 *.log
-local_settings.py
 
-# Flask stuff:
-instance/
-.webassets-cache
+# scons
+/.sconsign.dblite
 
-# Scrapy stuff:
-.scrapy
+# DS_Store
+.DS_Store
 
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
+# Java stuff
+.gradle/
 target/
+build/
 
-# IPython Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# Spyder project settings
-.spyderproject
-
-# Rope project settings
-.ropeproject
-
-# Sphinx documentation
-/docs/.doctrees/
-
-/.pytest_cache/
-/node_modules/
+# Jupyter notebooks
+.ipynb_checkpoints/
